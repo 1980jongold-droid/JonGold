@@ -1,0 +1,22 @@
+# Заголовки для Cloudflare Pages (https://developers.cloudflare.com/pages/configuration/headers/)
+
+/*
+  # Всё загружается только с этого сайта; исключение — Яндекс.Метрика
+  # (mc.yandex.ru / mc.yandex.com), она подключается после согласия на cookies
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://mc.yandex.ru https://yastatic.net; style-src 'self'; img-src 'self' data: https://mc.yandex.ru https://mc.yandex.com; font-src 'self'; connect-src 'self' https://mc.yandex.ru https://mc.yandex.com; frame-src https://mc.yandex.ru https://mc.yandex.com; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  # Сайт открывается только по HTTPS (1 год)
+  Strict-Transport-Security: max-age=31536000
+  # Запрет встраивать сайт в чужие страницы через iframe
+  X-Frame-Options: DENY
+  # Браузер не угадывает тип файлов
+  X-Content-Type-Options: nosniff
+  # Другим сайтам передаётся только домен, без полного адреса страницы
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Сайту не нужны камера, микрофон, геолокация и т. п.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+
+# Шрифты и картинки меняются редко — кэшируем надолго
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/img/*
+  Cache-Control: public, max-age=2592000
